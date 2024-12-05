@@ -11,7 +11,32 @@ function App() {
   const [projectsState, setProjectsState] = useState({
     selectedProjectId: undefined,
     projects: [],
+    tasks: [],
   });
+
+  // 태스크 추가 함수
+  const handleAddTask = (text) => {
+    setProjectsState((prevState) => {
+      const taskId = Math.random();
+      const newTask = {
+        text,
+        projectId: prevState.selectedProjectId,
+        id: taskId,
+      };
+      return {
+        ...prevState,
+        tasks: [...prevState.tasks, newTask],
+      };
+    });
+  };
+
+  // 태스크 삭제 함수
+  const handleDeleteTask = (taskId) => {
+    setProjectsState((prevState) => ({
+      ...prevState,
+      tasks: prevState.tasks.filter((task) => task.id !== taskId),
+    }));
+  };
 
   // 프로젝트 선택 함수
   const handleSelectProject = (id) => {
@@ -71,7 +96,13 @@ function App() {
 
   // 프로젝트 생성 페이지 조건 변경 함수
   let content = (
-    <SelectedProject project={selectedProject} onDelete={handleDeleteProject} />
+    <SelectedProject
+      project={selectedProject}
+      onDelete={handleDeleteProject}
+      onAddTask={handleAddTask}
+      onDeleteTask={handleDeleteTask}
+      tasks={projectsState.tasks}
+    />
   );
 
   if (projectsState.selectedProjectId === null) {
@@ -91,6 +122,7 @@ function App() {
         onStartAddProject={handleStartAddProject}
         projects={projectsState.projects}
         onSelectProject={handleSelectProject}
+        selectedProjectId={projectsState.selectedProjectId}
       />
       {content}
     </main>
