@@ -3,6 +3,7 @@ import React from "react";
 const CreateProject = ({ onCreateProject, project, setProject }) => {
   const handleClick = () => {
     if (project.title && project.description && project.date) {
+      project.id = Math.floor(Math.random() * 1000000);
       onCreateProject(project);
       setProject({ title: "", description: "", date: "" });
     }

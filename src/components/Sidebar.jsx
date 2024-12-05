@@ -1,9 +1,9 @@
 import React from "react";
 
 const Sidebar = ({ projects, onDeleteProject, selectProject }) => {
-  const handleProjectClick = (title) => {
+  const handleProjectClick = (project) => {
     // 프로젝트 상세 정보
-    selectProject(title);
+    selectProject(project);
   };
 
   const handleDeleteProject = (e, project) => {
@@ -57,10 +57,10 @@ const Sidebar = ({ projects, onDeleteProject, selectProject }) => {
             </span>
           </div>
           <ul className="space-y-2 font-medium">
-            {projects.map((project, index) => (
+            {projects.map((project) => (
               <li
-                onClick={() => handleProjectClick(project.title)}
-                key={index}
+                onClick={() => handleProjectClick(project)}
+                key={project.id}
                 className="hover:bg-gray-300 cursor-pointer rounded-md p-2 flex items-center justify-between"
               >
                 <div>{project.title}</div>

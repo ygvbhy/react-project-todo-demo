@@ -6,13 +6,13 @@ import ProjectInformation from "./components/ProjectInformation";
 function App() {
   // 사이드바 보낼 내용
   const [projects, setProjects] = useState([]);
-  // 프로젝트 task 정보 저장 할 state
-  const [projectTaskInfo, setProjectTaskInfo] = useState([]);
   // 프로젝트 생성 함수
   const [project, setProject] = useState({
     title: "",
     description: "",
     date: "",
+    id: "",
+    tasks: [],
   });
   // 현재 선택한 프로젝트 정보
   const [selectedProject, setSelectedProject] = useState(null);
@@ -21,12 +21,17 @@ function App() {
     setProjects([...projects, project]);
   };
 
-  const handleDeleteProject = (project) => {
-    setProjects(projects.filter((p) => p.title !== project.title));
+  const handleSetTask = (project) => {
+    setProjects(projects.map((p) => (p.id === project.id ? project : p)));
+    handleSelectProject(project);
   };
 
-  const handleSelectProject = (title) => {
-    setSelectedProject(title);
+  const handleDeleteProject = (project) => {
+    setProjects(projects.filter((p) => p.id !== project.id));
+  };
+
+  const handleSelectProject = (project) => {
+    setSelectedProject(project);
   };
 
   return (
@@ -44,7 +49,10 @@ function App() {
             setProject={setProject}
           />
         ) : (
-          <ProjectInformation />
+          <ProjectInformation
+            project={selectedProject}
+            setTask={handleSetTask}
+          />
         )}
       </section>
     </>
