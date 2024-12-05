@@ -53,13 +53,26 @@ function App() {
     });
   };
 
+  // 프로젝트 삭제 함수
+  const handleDeleteProject = () => {
+    setProjectsState((prevState) => ({
+      ...prevState,
+      selectedProjectId: undefined,
+      projects: prevState.projects.filter(
+        (project) => project.id !== prevState.selectedProjectId
+      ),
+    }));
+  };
+
   // 선택된 프로젝트 찾기
   const selectedProject = projectsState.projects.find(
     (project) => project.id === projectsState.selectedProjectId
   );
 
   // 프로젝트 생성 페이지 조건 변경 함수
-  let content = <SelectedProject project={selectedProject} />;
+  let content = (
+    <SelectedProject project={selectedProject} onDelete={handleDeleteProject} />
+  );
 
   if (projectsState.selectedProjectId === null) {
     content = (
