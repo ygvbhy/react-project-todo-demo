@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 
+// input 재사용 컴포넌트
 const Input = forwardRef(({ textarea, label, ...props }, ref) => {
   const classes =
     "w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600";

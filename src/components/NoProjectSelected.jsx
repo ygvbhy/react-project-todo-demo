@@ -1,6 +1,8 @@
 import React from "react";
 import noProjectSelected from "../assets/no-projects.png";
 import Button from "./Button";
+
+// 프로젝트 선택 안된 경우 화면
 const NoProjectSelected = ({ onStartAddProject }) => {
   return (
     <div className="mt-24 text-center w-2/3 ">

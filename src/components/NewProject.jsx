@@ -2,26 +2,33 @@ import React, { useRef } from "react";
 import Input from "./Input";
 import Modal from "./Modal";
 
+// 프로젝트 생성 컴포넌트
 const NewProject = ({ onAddProject, onCancel }) => {
+  // 모달 참조
   const modalRef = useRef();
+  // 입력 참조
   const titleRef = useRef();
   const descriptionRef = useRef();
   const dueDateRef = useRef();
 
+  // 프로젝트 생성 함수 및 참조 값 저장
   const handleSave = () => {
     const enteredTitle = titleRef.current.value;
     const enteredDescription = descriptionRef.current.value;
     const enteredDueDate = dueDateRef.current.value;
 
     if (
+      // 입력 값 검증
       enteredTitle.trim() === "" ||
       enteredDescription.trim() === "" ||
       enteredDueDate.trim() === ""
     ) {
+      // 검증 불합시 모달 오픈
       modalRef.current.open();
       return;
     }
 
+    // 프로젝트 생성 함수 호출
     onAddProject({
       title: enteredTitle,
       description: enteredDescription,
