@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
 const ProjectInformation = ({ project, setTask }) => {
+  // 태스크 상태
   const [tasks, setTasks] = useState({
     id: "",
     title: "",
   });
 
+  // 태스크 추가 함수
   const handleClick = () => {
     const newProject = { ...project };
     newProject.tasks.push(tasks);
@@ -16,6 +18,7 @@ const ProjectInformation = ({ project, setTask }) => {
     });
   };
 
+  // 태스크 변경 함수
   const handleChange = (e) => {
     setTasks({
       ...tasks,
@@ -24,6 +27,7 @@ const ProjectInformation = ({ project, setTask }) => {
     });
   };
 
+  // 태스크 삭제 함수
   const handleDeleteTask = (id) => {
     console.log(id);
     console.log(project.tasks);

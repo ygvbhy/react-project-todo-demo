@@ -17,19 +17,23 @@ function App() {
   // 현재 선택한 프로젝트 정보
   const [selectedProject, setSelectedProject] = useState(null);
 
+  // 프로젝트 생성 함수
   const handleCreateProject = (project) => {
     setProjects([...projects, project]);
   };
 
+  // 태스크 추가 함수
   const handleSetTask = (project) => {
     setProjects(projects.map((p) => (p.id === project.id ? project : p)));
     handleSelectProject(project);
   };
 
+  // 프로젝트 삭제 함수
   const handleDeleteProject = (project) => {
     setProjects(projects.filter((p) => p.id !== project.id));
   };
 
+  // 프로젝트 선택 함수
   const handleSelectProject = (project) => {
     setSelectedProject(project);
   };

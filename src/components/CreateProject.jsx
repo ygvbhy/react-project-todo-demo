@@ -1,6 +1,7 @@
 import React from "react";
 
 const CreateProject = ({ onCreateProject, project, setProject }) => {
+  // 프로젝트 생성 함수
   const handleClick = () => {
     if (project.title && project.description && project.date) {
       project.id = Math.floor(Math.random() * 1000000);
@@ -9,6 +10,7 @@ const CreateProject = ({ onCreateProject, project, setProject }) => {
     }
   };
 
+  // 프로젝트 정보 변경 함수
   const handleChange = (e) => {
     setProject({ ...project, [e.target.id]: e.target.value });
   };
