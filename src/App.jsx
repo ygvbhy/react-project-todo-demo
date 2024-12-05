@@ -2,6 +2,7 @@ import ProjectsSidebar from "./components/ProjectsSidebar";
 import NoProjectSelected from "./components/NoProjectSelected";
 import { useState } from "react";
 import NewProject from "./components/NewProject";
+import SelectedProject from "./components/SelectedProject";
 
 function App() {
   // 프로젝트 상태
@@ -11,6 +12,14 @@ function App() {
     selectedProjectId: undefined,
     projects: [],
   });
+
+  // 프로젝트 선택 함수
+  const handleSelectProject = (id) => {
+    setProjectsState((prevState) => ({
+      ...prevState,
+      selectedProjectId: id,
+    }));
+  };
 
   // 사이드바 및 프로젝트 추가 버튼 클릭시 프로젝트 생성 페이지 전환 조건 변경 함수
   const handleStartAddProject = () => {
@@ -44,8 +53,13 @@ function App() {
     });
   };
 
+  // 선택된 프로젝트 찾기
+  const selectedProject = projectsState.projects.find(
+    (project) => project.id === projectsState.selectedProjectId
+  );
+
   // 프로젝트 생성 페이지 조건 변경 함수
-  let content;
+  let content = <SelectedProject project={selectedProject} />;
 
   if (projectsState.selectedProjectId === null) {
     content = (
@@ -63,6 +77,7 @@ function App() {
       <ProjectsSidebar
         onStartAddProject={handleStartAddProject}
         projects={projectsState.projects}
+        onSelectProject={handleSelectProject}
       />
       {content}
     </main>
